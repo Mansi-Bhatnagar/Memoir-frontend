@@ -28,17 +28,16 @@ const CreateNote = () => {
     toolbar: toolbarOptions,
   };
 
-  //   const quill= new ReactQuill;
   //States
   const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
 
   //Handlers
   const cancelHandler = () => {
     setValue("");
+    setTitle("");
     navigate(-1);
   };
-
-  console.log();
 
   return (
     <div className="mx-auto min-h-screen p-8 max-sm:p-4 max-sm:pt-6">
@@ -46,9 +45,18 @@ const CreateNote = () => {
         <PrimaryButton name="Save" />
         <GhostButton name="Cancel" onClick={cancelHandler} />
       </div>
+      <div className="mx-auto mt-10 w-full max-w-7xl">
+        <input
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          type="text"
+          placeholder="Title"
+          className="w-full border-transparent bg-transparent pb-3 text-5xl text-white outline-none placeholder:text-white/50 focus-within:border-b focus-within:border-b-white"
+        />
+      </div>
       <ReactQuill
         modules={module}
-        className="mx-auto w-full max-w-7xl pt-10 [&_div]:text-white"
+        className="mx-auto w-full max-w-7xl pt-8 [&_div]:text-lg [&_div]:text-white last:[&_div]:min-h-80"
         theme="snow"
         value={value}
         onChange={setValue}
